@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Hello from './components/Hello.vue';
+import Painting from './components/Painting.vue';
+import Home from './components/Home.vue';
 import Error404 from './components/Error404.vue';
 
 Vue.use(VueRouter);
 
 export const AppRouter = new VueRouter({
   routes: [
-    { path: '/', component: Hello }, // Default
+    { path: '/', component: Home },
+    { path: '/painting', component: Painting }, // Default
     { path: '*', component: Error404 } // Not found
   ]
 });
