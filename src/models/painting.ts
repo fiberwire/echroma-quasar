@@ -2,5 +2,9 @@
 import { Path } from './path';
 
 export class Painting {
-    paths: Path[];
+  constructor(
+    public width: number,
+    public height: number,
+    public paths: Path[]
+  ) { }
 }
