@@ -11,7 +11,6 @@ import {
   QItemSide,
   QToolbar,
   QToolbarTitle,
-  QSideLink
 } from 'quasar';
 
 @Component({
@@ -26,18 +25,8 @@ import {
     QItemSide,
     QToolbar,
     QToolbarTitle,
-    QSideLink
   }
 })
-export default class Home extends Vue {
+export default class NewPainting extends Vue {
 
-  $refs: {
-    layout: any // couldn't find name QLayout for some reason
-  };
-
-  public newPainting() {
-    this.$refs.layout.hideCurrentSide(() => {
-      this.$router.push(`painting/new`);
-    });
-  }
 }
