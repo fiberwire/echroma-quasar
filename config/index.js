@@ -6,8 +6,7 @@ module.exports = {
     quasar: path.resolve(__dirname, '../node_modules/quasar-framework/'),
     src: path.resolve(__dirname, '../src'),
     assets: path.resolve(__dirname, '../src/assets'),
-    '@': path.resolve(__dirname, '../src/components'),
-    variables: path.resolve(__dirname, '../src/themes/quasar.variables.styl')
+    components: path.resolve(__dirname, '../src/components')
   },
 
   // Progress Bar Webpack plugin format
@@ -19,12 +18,15 @@ module.exports = {
 
   build: {
     env: require('./prod.env'),
+    index: path.resolve(__dirname, '../dist/index.html'),
     publicPath: '',
     productionSourceMap: false,
-
-    // Remove unused CSS
-    // Disable it if it has side-effects for your specific app
-    purifyCSS: true
+    // Gzip off by default as many popular static hosts such as
+    // Surge or Netlify already gzip all static assets for you.
+    // Before setting to `true`, make sure to:
+    // npm install --save-dev compression-webpack-plugin
+    productionGzip: false,
+    productionGzipExtensions: ['js', 'css']
   },
   dev: {
     env: require('./dev.env'),
@@ -32,7 +34,7 @@ module.exports = {
     // auto open browser or not
     openBrowser: true,
     publicPath: '/',
-    port: 8081,
+    port: 8080,
 
     // If for example you are using Quasar Play
     // to generate a QR code then on each dev (re)compilation

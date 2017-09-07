@@ -1,30 +1,22 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <header></header>
-    <main>
-      <img src="~assets/quasar-logo-full.svg" alt="Quasar PWA">
-      <router-view></router-view>
-    </main>
+    <router-view></router-view>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 /*
  * Root component
  */
-export default {}
+import Vue from 'vue';
+import Component from 'vue-class-component';
+
+@Component({
+  name: 'App'
+})
+export default class App extends Vue {
+}
 </script>
 
-<style lang="stylus">
-@import '~variables'
-
-main
-  text-align center
-  margin-top 40px
-
-header
-  margin 0
-  height 10px
-  background-color $primary
-</style>
+<style></style>
