@@ -3,6 +3,9 @@ import { IGenomeOptions } from 'enome';
 
 export interface PaintingGenOptions extends IGenomeOptions {
 
+    width: number;
+    height: number;
+
     // min and max coordinates
     minX: number;
     maxX: number;
@@ -25,8 +28,8 @@ export interface PaintingGenOptions extends IGenomeOptions {
     minYRadius: number;
     maxYRadius: number;
 
-    minXRotation: number;
-    maxXRotation: number;
+    minRotation: number;
+    maxRotation: number;
 
     minLarge: number;
     maxLarge: number;
@@ -34,5 +37,7 @@ export interface PaintingGenOptions extends IGenomeOptions {
     minSweep: number;
     maxSweep: number;
 
-
+    // circles
+    minRadius: number;
+    maxRadius: number;
 }
