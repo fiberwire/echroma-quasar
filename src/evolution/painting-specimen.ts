@@ -11,26 +11,10 @@ export class PaintingSpecimen extends Specimen<PaintingGenOptions, Painting> {
     const g = genotype;
     const o = g.options;
 
+    // use a gene to determine how many paths to make
     const paths = _.range(g.g.int(o.minPaths, o.maxPaths))
       .map(i => {
-        return new Path().random({
-          length: g.g.float(o.minLength, o.maxLength),
-          x1: g.g.float(o.minX, o.maxX),
-          y1: g.g.float(o.minY, o.maxY),
-          x2: g.g.float(o.minX, o.maxX),
-          y2: g.g.float(o.minY, o.maxY),
-          rx: g.g.float(o.minXRadius, o.maxXRadius),
-          ry: g.g.float(o.minYRadius, o.maxYRadius),
-          cx: g.g.float(o.minX, o.maxX),
-          cy: g.g.float(o.minY, o.maxY),
-          r: g.g.float(o.minRadius, o.maxRadius),
-          rotation: g.g.float(o.minRotation, o.maxRotation),
-          large: g.g.int(o.minLarge, o.maxLarge),
-          sweep: g.g.int(o.minSweep, o.maxSweep),
-          x: g.g.float(o.minX, o.maxX),
-          y: g.g.float(o.minY, o.maxY),
-          close: g.g.bool()
-        });
+        return Path.geneticPath(this.genotype);
       });
 
     return new Painting(o.width, o.height, paths);

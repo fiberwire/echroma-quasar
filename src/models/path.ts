@@ -1,13 +1,14 @@
-import { Gene } from 'enome';
+import { Gene, Genome } from 'enome';
 import * as _ from 'lodash';
+import { PaintingGenOptions } from '../evolution/painting-gen-options';
 
 export class Path {
 
   constructor(public d: string = '') { }
 
-  public moveTo(x: number, y: number): Path {
+  public static moveTo(x: number, y: number): Path {
     const d = `M ${x} ${y}`;
-    return new Path(`${this.d} ${d}`);
+    return new Path(d);
   }
 
   public curveTo(x1: number, y1: number, x2: number, y2: number, x: number, y: number): Path {
@@ -45,33 +46,49 @@ export class Path {
     return new Path(`${this.d} ${d}`);
   }
 
-  public random(
-    o: {
-      length: number,
-      x1: number, y1: number,
-      x2: number, y2: number,
-      rx: number, ry: number,
-      cx: number, cy: number, r: number,
-      rotation: number, large: number,
-      sweep: number, x: number,
-      y: number, close: boolean
-    }
-  ): Path {
-    const moved = this.moveTo(o.x, o.y);
+  public static geneticPath(g: Genome<PaintingGenOptions>): Path {
+    const o = g.options;
 
-    const {
-      length, x1, y1,
-      x2, y2, rx, ry,
-      cx, cy, r,
-      rotation, large, sweep,
-      x, y, close
-    } = o;
+    // move to the starting point of the path
+    const moved = this.moveTo(
+      g.g.int(o.minX, o.maxX),
+      g.g.int(o.minY, o.maxY)
+    );
 
     const paths: Path[] = _.range(length)
       .map(i => {
-        const g = new Gene();
 
-        return g.element([
+        // generate needed value for paths
+        const {
+          length,
+          x, y,
+          x1, y1,
+          x2, y2,
+          rx, ry,
+          cx, cy,
+          r, rotation,
+          large, sweep, close,
+        } = {
+            x: g.g.float(o.minX, o.maxX),
+            y: g.g.float(o.minY, o.maxY),
+            length: g.g.float(o.minLength, o.maxLength),
+            x1: g.g.float(o.minX, o.maxX),
+            y1: g.g.float(o.minY, o.maxY),
+            x2: g.g.float(o.minX, o.maxX),
+            y2: g.g.float(o.minY, o.maxY),
+            rx: g.g.float(o.minXRadius, o.maxXRadius),
+            ry: g.g.float(o.minYRadius, o.maxYRadius),
+            cx: g.g.float(o.minX, o.maxX),
+            cy: g.g.float(o.minY, o.maxY),
+            r: g.g.float(o.minRadius, o.maxRadius),
+            rotation: g.g.float(o.minRotation, o.maxRotation),
+            large: g.g.int(o.minLarge, o.maxLarge),
+            sweep: g.g.int(o.minSweep, o.maxSweep),
+            close: g.g.bool()
+          };
+
+        // use a gene to determine what kind of path to make
+        g.g.element([
           moved.curveTo(x1, y1, x2, y2, x, y),
           moved.shortCurve(x2, y2, x, y),
           moved.quadraticCurve(x1, y1, x, y),
@@ -81,6 +98,7 @@ export class Path {
         ]);
       });
 
+    // combine segments of path into one full path
     const path = paths.reduce((p, c) => new Path(`${p.d} ${c.d}`));
 
     if (close) { return path.close(); }
