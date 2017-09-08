@@ -30,8 +30,8 @@ import {
 })
 export default class Home extends Vue {
 
-  $refs: {
-    layout: any // couldn't find name QLayout for some reason
+  $refs = {
+    layout: QLayout // couldn't find name QLayout for some reason
   };
 
   public newPainting() {
