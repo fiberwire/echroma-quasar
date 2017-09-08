@@ -1,7 +1,7 @@
 <template>
-  
+
   <div class="layout-padding">
-    
+    <painting-component :painting="specimen.phenotype"/>
   </div>
 </template>
 

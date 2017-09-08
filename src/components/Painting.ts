@@ -10,6 +10,6 @@ export default class PaintingComponent extends Vue {
     data() {
         return {
             painting: this.painting
-        }
+        };
     }
 }
