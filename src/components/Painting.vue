@@ -1,13 +1,15 @@
 <template>
-  <div></div>
+  <div>
+    <svg>
+      <path v-for="path of painting.paths" v-bind:d="path.d">
+      </path>
+    </svg>
+  </div>
 </template>
 
 <script>
-export default {
-  data () {
-    return {}
-  }
-}
+  import Painting from './Painting';
+  export default Painting;
 </script>
 
 <style>

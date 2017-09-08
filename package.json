@@ -16,6 +16,7 @@
     "quasar-extras": "0.0.7",
     "quasar-framework": "git+https://git@github.com/quasarframework/quasar-edge.git",
     "vue": "^2.3.0",
+    "vue-property-decorator": "^5.3.0",
     "vue-router": "^2.7.0"
   },
   "devDependencies": {
