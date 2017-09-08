@@ -1,7 +1,7 @@
 <template>
   <div>
     <svg>
-      <path v-for="path of painting.paths" v-bind:d="path.d">
+      <path v-bind:key="path.d" v-for="path of painting.path" :d="path.d">
       </path>
     </svg>
   </div>
